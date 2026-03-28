@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Google",
+    "career_url": "https://careers.google.com/jobs/results/",
+    "keywords": ["engineer", "analyst"]
+  },
+  {
+    "name": "Anthropic",
+    "career_url": "https://www.anthropic.com/careers",
+    "keywords": []
+  },
+  {
+    "name": "Notion",
+    "career_url": "https://www.notion.so/careers",
+    "keywords": []
+  }
+]
