@@ -2,16 +2,41 @@
   {
     "name": "Google",
     "career_url": "https://careers.google.com/jobs/results/",
-    "keywords": ["engineer", "analyst"]
+    "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
   },
   {
     "name": "Anthropic",
     "career_url": "https://www.anthropic.com/careers",
-    "keywords": []
+    "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
   },
   {
     "name": "Notion",
     "career_url": "https://www.notion.so/careers",
-    "keywords": []
-  }
+    "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
+  },
+  {
+    "name": "Razorpay",
+    "career_url": "https://razorpay.com/jobs/jobs-all/",
+    "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
+  },
+  {
+    "name": "PhonePe",
+    "career_url": "https://www.phonepe.com/careers/job-openings/",
+    "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
+  },
+  {
+    "name": "Signzy",
+    "career_url": "https://www.signzy.com/careers",
+    "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
+  },
+  {
+    "name": "Mastercard",
+    "career_url": "https://careers.mastercard.com/us/en/search-results",
+    "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
+  },
+  {
+    "name": "BMC Software",
+    "career_url": "https://jobs.bmc.com/Careers/SearchJobs/?16484=%5B9406%5D&16484_format=5516&listFilterMode=1&jobRecordsPerPage=6&",
+    "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
+  },
 ]
