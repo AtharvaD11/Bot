@@ -38,5 +38,10 @@
     "name": "BMC Software",
     "career_url": "https://jobs.bmc.com/Careers/SearchJobs/?16484=%5B9406%5D&16484_format=5516&listFilterMode=1&jobRecordsPerPage=6&",
     "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
+  },
+  {
+    "name": "Wells Fargo",
+    "career_url": "https://www.wellsfargojobs.com/en/jobs",
+    "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
   }
 ]
