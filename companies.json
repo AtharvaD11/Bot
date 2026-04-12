@@ -41,7 +41,7 @@
   },
   {
     "name": "Wells Fargo",
-    "career_url": "https://www.wellsfargojobs.com/en/jobs/?keyword=software+engineer&country=IND",
+    "career_url": "https://boards-api.greenhouse.io/v1/boards/wellsfargo/jobs?content=true",
     "keywords": ["engineer", "software", "developer", "Full Stack", ".Net", "Angular"]
   },
   {
