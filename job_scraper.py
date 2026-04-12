@@ -3,6 +3,8 @@ import os
 import hashlib
 import logging
 import time
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse, urljoin
@@ -137,7 +139,7 @@ def scrape_microsoft(company):
     while page <= MAX_PAGES:
         url = base_url if page == 1 else base_url + f"&pg={page}"
         try:
-            resp = requests.get(url, headers=HEADERS, timeout=20)
+            resp = requests.get(url, headers=HEADERS, timeout=20, verify=False)
             resp.raise_for_status()
             data = resp.json()
         except Exception as e:
@@ -264,6 +266,32 @@ def scrape_generic(company):
     log.info(f"[{name}] Generic: {len(all_jobs)} job(s) across {page_num} page(s).")
     return all_jobs
 
+def scrape_greenhouse(company):
+    name = company["name"]
+    keywords = [k.lower() for k in company.get("keywords", [])]
+    url = company["career_url"]
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=20)
+        resp.raise_for_status()
+        data = resp.json()
+    except Exception as e:
+        log.warning(f"[{name}] Greenhouse API error: {e}")
+        return []
+    jobs = []
+    for job in data.get("jobs", []):
+        title = job.get("title", "").strip()
+        full_url = job.get("absolute_url", "")
+        location = job.get("location", {}).get("name", "")
+        if not title:
+            continue
+        title_lower = title.lower()
+        matches_keyword = any(k in title_lower for k in keywords) if keywords else True
+        if not matches_keyword:
+            continue
+        jobs.append({"title": title, "url": full_url, "description": location, "company": name})
+    log.info(f"[{name}] Greenhouse: found {len(jobs)} job(s).")
+    return jobs
+
 # ── Router ────────────────────────────────────────────────────────────────────
 
 def scrape_jobs(company):
@@ -272,6 +300,8 @@ def scrape_jobs(company):
         return scrape_workday(company)
     elif "jobs.careers.microsoft.com" in url:
         return scrape_microsoft(company)
+    elif "boards-api.greenhouse.io" in url:
+        return scrape_greenhouse(company)
     else:
         return scrape_generic(company)
 
@@ -279,13 +309,13 @@ def scrape_jobs(company):
 
 def send_telegram(message):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "Markdown"}
+    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message}
     resp = requests.post(url, json=payload, timeout=10)
     resp.raise_for_status()
     log.info("Telegram message sent.")
 
 def format_messages(new_jobs):
-    header = f"🚀 *{len(new_jobs)} New Job(s) Found*\n_{datetime.now().strftime('%b %d, %H:%M')}_\n\n"
+    header = f"🚀 {len(new_jobs)} New Job(s) Found\n_{datetime.now().strftime('%b %d, %H:%M')}\n\n"
     messages = []
     current = header
     for j in new_jobs:
